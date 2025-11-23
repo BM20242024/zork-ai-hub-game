@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DTC AI HUB - Pushing AI Adoption</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Courier New', monospace;
+            color: #fff;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        #gameContainer {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 600px;
+            font-family: 'Courier New', monospace;
+            color: #0f0;
+        }
+        .instructions {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🍺 DTC AI HUB - Pushing AI Adoption</h1>
+        <div class="subtitle">Interactive Training Adventure</div>
+    </div>
+    
+    <div id="gameContainer">
+        <p style="color: #ff0;">Loading game... Please wait...</p>
+        <p style="color: #ff0;">If the game doesn't load in 5 seconds, please:</p>
+        <p style="color: #ff0;">1. Make sure you're running the PLAY_GAME script (not just opening this HTML)</p>
+        <p style="color: #ff0;">2. Check that dtc_zork.z3 is in the same folder</p>
+        <p style="color: #ff0;">3. Try refreshing the page</p>
+    </div>
+    
+    <div class="instructions">
+        <h3>Quick Start</h3>
+        <p><strong>Type "help"</strong> to see all commands</p>
+        <p><strong>Type "hints"</strong> if you get stuck</p>
+        <p><strong>Type "status"</strong> to check your progress</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/parchment@latest/dist/web/zvm.min.js"></script>
+    <script>
+        async function loadGame() {
+            try {
+                const response = await fetch('dtc_zork.z3');
+                if (!response.ok) {
+                    throw new Error('Could not load game file');
+                }
+                const gameData = await response.arrayBuffer();
+                
+                const container = document.getElementById('gameContainer');
+                container.innerHTML = '';
+                
+                // Initialize Parchment
+                parchment.options = {
+                    container: container,
+                    default_story: new Uint8Array(gameData)
+                };
+                
+                parchment.init();
+                
+            } catch (error) {
+                document.getElementById('gameContainer').innerHTML = `
+                    <p style="color: #f00;">Error loading game: ${error.message}</p>
+                    <p style="color: #ff0;">Make sure you:</p>
+                    <p style="color: #ff0;">1. Are running the PLAY_GAME launcher script</p>
+                    <p style="color: #ff0;">2. Have dtc_zork.z3 in the same folder</p>
+                    <p style="color: #ff0;">3. Your browser allows local file access</p>
+                `;
+            }
+        }
+        
+        // Load when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadGame);
+        } else {
+            loadGame();
+        }
+    </script>
+</body>
+</html>
+

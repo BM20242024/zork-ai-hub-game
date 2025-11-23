@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB InBev DTC AI Operations - Interactive Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .game-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .parchment-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .parchment-container iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .info-card h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .image-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .image-panel img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-caption {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .commands-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commands-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .commands-list li:last-child {
+            border-bottom: none;
+        }
+
+        .commands-list code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        @media (max-width: 968px) {
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+
+            .side-panel {
+                order: -1;
+            }
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍺 AB InBev DTC AI Operations Simulation</h1>
+        <p>Interactive Training Adventure - Powered by Open Source Zork</p>
+    </header>
+
+    <div class="game-container">
+        <div class="parchment-container">
+            <iframe id="game-frame" src="parchment.html?story=dtc_zork.z3"></iframe>
+        </div>
+
+        <div class="side-panel">
+            <div class="image-panel">
+                <img id="location-image" src="https://via.placeholder.com/350x250/1e3c72/ffffff?text=DTC+Hub" alt="Current Location">
+                <div class="image-caption">Global DTC AI Hub</div>
+            </div>
+
+            <div class="info-card">
+                <h2>📖 How to Play</h2>
+                <ul class="commands-list">
+                    <li><code>look</code> - Examine your surroundings</li>
+                    <li><code>inventory</code> or <code>i</code> - Check what you carry</li>
+                    <li><code>north, south, east, west</code> - Navigate</li>
+                    <li><code>take [object]</code> - Pick up an item</li>
+                    <li><code>examine [object]</code> - Look closely at something</li>
+                    <li><code>put [object] on [surface]</code> - Place an item</li>
+                    <li><code>push [object]</code> - Activate something</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h2>🎯 Your Mission</h2>
+                <p>Navigate the DTC AI operations centers and optimize the entire ecosystem. 
+                Find the neural data cube and use it to power up the mainframe. 
+                Once all systems are online, deliver the final presentation!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with ❤️ using Microsoft's Open Source Zork Code | © 2025 AB InBev</p>
+    </footer>
+
+    <script>
+        // Simple image updater based on location keywords
+        // This is a basic implementation - could be enhanced to parse game output
+        const locationImages = {
+            'hub': {
+                url: 'https://via.placeholder.com/350x250/1e3c72/ffffff?text=DTC+Hub',
+                caption: 'Global DTC AI Hub'
+            },
+            'ze': {
+                url: 'https://via.placeholder.com/350x250/28a745/ffffff?text=Ze+Delivery',
+                caption: 'Zé Delivery Operations (Brazil)'
+            },
+            'tada': {
+                url: 'https://via.placeholder.com/350x250/dc3545/ffffff?text=TaDa+Delivery',
+                caption: 'TaDa Delivery HQ (LATAM)'
+            },
+            'lab': {
+                url: 'https://via.placeholder.com/350x250/6f42c1/ffffff?text=PerfectDraft+Lab',
+                caption: 'PerfectDraft Lab (Europe)'
+            },
+            'data': {
+                url: 'https://via.placeholder.com/350x250/20c997/ffffff?text=Data+Center',
+                caption: 'Data Center'
+            },
+            'roof': {
+                url: 'https://via.placeholder.com/350x250/fd7e14/ffffff?text=Rooftop',
+                caption: 'Rooftop'
+            },
+            'conference': {
+                url: 'https://via.placeholder.com/350x250/0dcaf0/ffffff?text=Conference+Room',
+                caption: 'Executive Conference Room'
+            }
+        };
+
+        // Note: This is a placeholder. In a full implementation, you would need to
+        // intercept the game's output or use Parchment's API to detect location changes
+        console.log('Game loaded. Image updating is a placeholder - replace with actual game state detection.');
+    </script>
+</body>
+</html>
+
